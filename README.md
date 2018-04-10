@@ -9,7 +9,7 @@ If you prefer a pure restful api and want to customize the UI, you can refer to 
 1. Run composer to add the dependency.
 
 ```
-composer require kinso-lee/horizon-lumen
+composer require kinsolee/horizon-lumen
 ```
 
 2.Add the vendor:publish command dependency and publish its assets and config file. 
