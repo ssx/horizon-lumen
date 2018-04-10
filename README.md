@@ -1,18 +1,34 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-horizon.svg"></p>
-
-<p align="center">
-<a href="https://travis-ci.org/laravel/horizon"><img src="https://travis-ci.org/laravel/horizon.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/horizon"><img src="https://poser.pugx.org/laravel/horizon/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/horizon"><img src="https://poser.pugx.org/laravel/horizon/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/horizon"><img src="https://poser.pugx.org/laravel/horizon/license.svg" alt="License"></a>
-</p>
-
 ## Introduction
 
-Horizon provides a beautiful dashboard and code-driven configuration for your Laravel powered Redis queues. Horizon allows you to easily monitor key metrics of your queue system such as job throughput, runtime, and job failures.
+Horizon Horizon is based on the official [Laravel Horizon](https://github.com/laravel/horizon) package.The web UI is also included.
 
-All of your worker configuration is stored in a single, simple configuration file, allowing your configuration to stay in source control where your entire team can collaborate.
+If you prefer a pure restful api and want to customize the UI, you can refer to [Lumen-horizon](https://github.com/servocoder/lumen-horizon) by servocoder.
 
+## Installation
+
+1. Run composer to add the dependency.
+
+```
+composer require KinsoLee/horizon
+```
+
+2.Add the vendor:publish command dependency and publish its assets and config file. 
+
+```text
+composer require "laravelista/lumen-vendor-publish" --dev
+```
+
+```text
+php artisan vendor:publish --provider="Laravel\Horizon\HorizonServiceProvider"
+``` 
+
+## Problems
+* If you get the follow errors when you run vendor:publish:
+```
+Type error: Argument 1 passed to Laravel\Horizon\Repositories\RedisMasterSupervisorRepository::__construct() must implement interface Illuminate\Contr
+  acts\Redis\Factory, instance of Redis given
+```
+Make sure you register `Illuminate\Redis\RedisServiceProvider::class` in your `boorstrap/app.php` file.
 ## Official Documentation
 
 Documentation for Horizon can be found on the [Laravel website](http://laravel.com/docs/master/horizon).
