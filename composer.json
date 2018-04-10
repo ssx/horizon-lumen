@@ -2,14 +2,20 @@
     "name": "laravel/horizon",
     "description": "Dashboard and code-driven configuration for Laravel queues.",
     "keywords": [
-        "laravel",
-        "queue"
+        "lumen",
+        "queue",
+        "horizon",
+        "user interface"
     ],
     "license": "MIT",
     "authors": [
         {
             "name": "Taylor Otwell",
             "email": "taylor@laravel.com"
+        },
+        {
+            "name": "Kinso Lee",
+            "email": "lijingzhao.love@gmail.com"
         }
     ],
     "require": {
@@ -35,7 +41,7 @@
         "psr-4": {
             "Laravel\\Horizon\\": "src/"
         },
-        "files" : [
+        "files": [
             "src/helpers.php"
         ]
     },
