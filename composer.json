@@ -1,5 +1,5 @@
 {
-    "name": "laravel/horizon",
+    "name": "KinsoLee/horizon-lumen",
     "description": "Dashboard and code-driven configuration for Laravel queues.",
     "keywords": [
         "lumen",
