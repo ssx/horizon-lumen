@@ -153,7 +153,7 @@
                 <div class="card-header">Overview</div>
 
                 <div class="card-body p-0">
-                    <div class="container">
+                    <div class="container-fluid">
                         <div class="stats row">
                             <div class="stat col-3 p-4">
                                 <h2 class="stat-title">Jobs Per Minute</h2>
@@ -202,7 +202,7 @@
                                     {{ stats.max_wait_queue || '&nbsp;' }}
                                 </h3>
                                 <span class="stat-value">
-                                    {{ stats.max_wait_time ? stats.max_wait_time + 's' : '-' }}
+                                    {{ stats.max_wait_time ? humanTime(stats.max_wait_time) : '-' }}
                                 </span>
                             </div>
 

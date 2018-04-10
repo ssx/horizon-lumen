@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Events\Dispatcher;
 use Laravel\Horizon\Connectors\RedisConnector;
+use Laravel\Horizon\Console\WorkCommand;
 
 class HorizonServiceProvider extends ServiceProvider
 {
@@ -21,6 +22,7 @@ class HorizonServiceProvider extends ServiceProvider
     {
         $this->registerEvents();
         $this->registerRoutes();
+        $this->registerRedisAlias();
         $this->registerResources();
         $this->defineAssetPublishing();
     }
@@ -51,7 +53,7 @@ class HorizonServiceProvider extends ServiceProvider
         Route::group([
             'prefix' => config('horizon.uri', 'horizon'),
             'namespace' => 'Laravel\Horizon\Http\Controllers',
-            'middleware' => config('horizon.middleware', 'web'),
+            'middleware' => config('horizon.middleware'),
         ], function () {
             $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
         });
@@ -68,6 +70,18 @@ class HorizonServiceProvider extends ServiceProvider
     }
 
     /**
+     * Register redis factory.
+     *
+     * @return void
+     */
+    protected function registerRedisAlias()
+    {
+        $this->app->alias('redis', \Illuminate\Contracts\Redis\Factory::class);
+
+        $this->app->make('redis');
+    }
+
+    /**
      * Define the asset publishing configuration.
      *
      * @return void
@@ -75,7 +89,7 @@ class HorizonServiceProvider extends ServiceProvider
     public function defineAssetPublishing()
     {
         $this->publishes([
-            HORIZON_PATH.'/public' => public_path('vendor/horizon'),
+            HORIZON_PATH.'/public' => base_path('public/vendor/horizon'),
         ], 'horizon-assets');
     }
 
@@ -107,6 +121,7 @@ class HorizonServiceProvider extends ServiceProvider
         $this->configure();
         $this->offerPublishing();
         $this->registerServices();
+        $this->registerQueueWorkCommand();
         $this->registerCommands();
         $this->registerQueueConnectors();
     }
@@ -118,6 +133,7 @@ class HorizonServiceProvider extends ServiceProvider
      */
     protected function configure()
     {
+        $this->app->configure('horizon');
         $this->mergeConfigFrom(
             __DIR__.'/../config/horizon.php', 'horizon'
         );
@@ -134,9 +150,21 @@ class HorizonServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__.'/../config/horizon.php' => config_path('horizon.php'),
+                __DIR__.'/../config/horizon.php' => app()->basePath('config/horizon.php'),
             ], 'horizon-config');
         }
+    }
+
+    /**
+     * Register the command instance.
+     *
+     * @return void
+     */
+    protected function registerQueueWorkCommand()
+    {
+        $this->app->singleton(WorkCommand::class, function ($app) {
+            return new WorkCommand($app['queue.worker']);
+        });
     }
 
     /**
@@ -146,7 +174,7 @@ class HorizonServiceProvider extends ServiceProvider
      */
     protected function registerServices()
     {
-        foreach ($this->bindings as $key => $value) {
+        foreach ($this->serviceBindings as $key => $value) {
             is_numeric($key)
                     ? $this->app->singleton($value)
                     : $this->app->singleton($key, $value);

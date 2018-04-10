@@ -37,7 +37,7 @@ class HorizonCommand extends Command
      */
     public function handle()
     {
-        $repository = resolve(MasterSupervisorRepository::class);
+        $repository = app(MasterSupervisorRepository::class);
 
         if ($repository->find(MasterSupervisor::name())) {
             return $this->comment('A master supervisor is already running on this machine.');
@@ -48,7 +48,7 @@ class HorizonCommand extends Command
         });
 
         ProvisioningPlan::get(MasterSupervisor::name())->deploy(
-            config('app.env')
+            app()->environment()
         );
 
         $this->info('Horizon started successfully.');
