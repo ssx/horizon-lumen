@@ -51,11 +51,11 @@ class HorizonServiceProvider extends ServiceProvider
     protected function registerRoutes()
     {
         Route::group([
-            'prefix' => config('horizon.uri', 'horizon'),
-            'namespace' => 'Laravel\Horizon\Http\Controllers',
+            'prefix'     => config('horizon.uri', 'horizon'),
+            'namespace'  => 'Laravel\Horizon\Http\Controllers',
             'middleware' => config('horizon.middleware'),
         ], function () {
-            $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
+            require __DIR__ . '/../routes/web.php';
         });
     }
 
@@ -66,7 +66,7 @@ class HorizonServiceProvider extends ServiceProvider
      */
     protected function registerResources()
     {
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'horizon');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'horizon');
     }
 
     /**
@@ -89,7 +89,7 @@ class HorizonServiceProvider extends ServiceProvider
     public function defineAssetPublishing()
     {
         $this->publishes([
-            HORIZON_PATH.'/public' => base_path('public/vendor/horizon'),
+            HORIZON_PATH . '/public' => base_path('public/vendor/horizon'),
         ], 'horizon-assets');
     }
 
@@ -114,8 +114,8 @@ class HorizonServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        if (! defined('HORIZON_PATH')) {
-            define('HORIZON_PATH', realpath(__DIR__.'/../'));
+        if (!defined('HORIZON_PATH')) {
+            define('HORIZON_PATH', realpath(__DIR__ . '/../'));
         }
 
         $this->configure();
@@ -135,7 +135,7 @@ class HorizonServiceProvider extends ServiceProvider
     {
         $this->app->configure('horizon');
         $this->mergeConfigFrom(
-            __DIR__.'/../config/horizon.php', 'horizon'
+            __DIR__ . '/../config/horizon.php', 'horizon'
         );
 
         Horizon::use(config('horizon.use'));
@@ -150,7 +150,7 @@ class HorizonServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__.'/../config/horizon.php' => app()->basePath('config/horizon.php'),
+                __DIR__ . '/../config/horizon.php' => app()->basePath('config/horizon.php'),
             ], 'horizon-config');
         }
     }
@@ -176,8 +176,8 @@ class HorizonServiceProvider extends ServiceProvider
     {
         foreach ($this->serviceBindings as $key => $value) {
             is_numeric($key)
-                    ? $this->app->singleton($value)
-                    : $this->app->singleton($key, $value);
+                ? $this->app->singleton($value)
+                : $this->app->singleton($key, $value);
         }
     }
 
