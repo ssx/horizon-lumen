@@ -31,7 +31,7 @@ Type error: Argument 1 passed to Laravel\Horizon\Repositories\RedisMasterSupervi
 Make sure you register `Illuminate\Redis\RedisServiceProvider::class` in your `boorstrap/app.php` file.
 ## Official Documentation
 
-Documentation for Horizon can be found on the [Laravel website](http://laravel.com/docs/master/horizon).
+Documentation for Horizon can be found on the [Laravel website](http://laravel.com/docs/horizon).
 
 ## License
 
