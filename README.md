@@ -29,6 +29,8 @@ Type error: Argument 1 passed to Laravel\Horizon\Repositories\RedisMasterSupervi
   acts\Redis\Factory, instance of Redis given
 ```
 Make sure you register `Illuminate\Redis\RedisServiceProvider::class` in your `boorstrap/app.php` file.
+
+* If you deploy horizon-lumen on sub-directory, please specific `base_path` in config/horizon.php
 ## Official Documentation
 
 Documentation for Horizon can be found on the [Laravel website](http://laravel.com/docs/horizon).
