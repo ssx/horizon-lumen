@@ -2,6 +2,19 @@
 
 return [
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | Horizon Base Path
+    |--------------------------------------------------------------------------
+    |
+    | This is the base path that Horizon will sit under. This is helpful
+    | if you need to use Horizon in a subdirectory on the server. The default
+    | is empty so that Horizon will run from the root directory on the server.
+    |
+    */
+    'base_path' => '',
+
     /*
     |--------------------------------------------------------------------------
     | Horizon Redis Connection
@@ -74,20 +87,20 @@ return [
         'production' => [
             'supervisor-1' => [
                 'connection' => 'redis',
-                'queue' => ['default'],
-                'balance' => 'simple',
-                'processes' => 10,
-                'tries' => 3,
+                'queue'      => ['default'],
+                'balance'    => 'simple',
+                'processes'  => 10,
+                'tries'      => 3,
             ],
         ],
 
         'local' => [
             'supervisor-1' => [
                 'connection' => 'redis',
-                'queue' => ['default'],
-                'balance' => 'simple',
-                'processes' => 3,
-                'tries' => 3,
+                'queue'      => ['default'],
+                'balance'    => 'simple',
+                'processes'  => 3,
+                'tries'      => 3,
             ],
         ],
     ],

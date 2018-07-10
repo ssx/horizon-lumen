@@ -133,7 +133,7 @@
             <tbody>
             <tr v-for="job in jobs">
                 <td>
-                    <a v-if="job.status == 'failed'" :href="'/horizon/failed/'+job.id"
+                    <a v-if="job.status == 'failed'" :href="$root.basePath+'/horizon/failed/'+job.id"
                        data-toggle="tooltip" :title="job.name">{{ jobBaseName(job.name) }}
                     </a>
                     <span data-toggle="tooltip" :title="job.name" v-else>{{ jobBaseName(job.name) }}</span>
