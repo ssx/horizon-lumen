@@ -18,6 +18,11 @@ composer require kinsolee/horizon-lumen
 composer require "laravelista/lumen-vendor-publish" --dev
 ```
 
+3. Add `Laravelista\LumenVendorPublish\VendorPublishCommand` to `app/Console/Kernel.php` file.
+
+4. Add `$app->register(\Laravel\Horizon\HorizonServiceProvider::class);` in your `boorstrap/app.php` file.
+
+5. Publish horizon vendor
 ```text
 php artisan vendor:publish --provider="Laravel\Horizon\HorizonServiceProvider"
 ``` 
