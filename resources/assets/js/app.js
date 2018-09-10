@@ -60,13 +60,13 @@ Vue.mixin({
 
 
         /**
-         * Convert to human readable timestamp.
+         * Format the tags.
          */
-        displayableTagsList(tags){
+        displayableTagsList(tags, truncate = true){
             if (!tags || !tags.length) return '';
 
             return _.reduce(tags, (s, n)=> {
-                return (s ? s + ', ' : '') + _.truncate(n);
+                return (s ? s + ', ' : '') + (truncate ? _.truncate(n) : n);
             }, '');
         }
     }
