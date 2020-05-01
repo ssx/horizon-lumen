@@ -27,7 +27,7 @@
         "illuminate/queue": "~5.7.0|~5.8.0|^6.0",
         "illuminate/support": "~5.7.0|~5.8.0|^6.0",
         "predis/predis": "^1.1",
-        "ramsey/uuid": "^3.5",
+        "ramsey/uuid": "^4.1",
         "symfony/process": "^4.2",
         "symfony/debug": "^4.2",
         "laravelista/lumen-vendor-publish": "~5.7.0|~5.8.0|^6.0"
