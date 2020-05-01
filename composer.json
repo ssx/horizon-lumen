@@ -28,7 +28,7 @@
         "illuminate/queue": "~5.5",
         "illuminate/support": "~5.5",
         "predis/predis": "^1.1",
-        "ramsey/uuid": "^3.5",
+        "ramsey/uuid": "^4.1",
         "symfony/debug": "~3.3|~4.0"
     },
     "require-dev": {
